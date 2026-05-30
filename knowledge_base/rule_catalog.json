@@ -1,0 +1,1350 @@
+[
+    {
+        "rule_id": "R-AGE-001",
+        "name": "Classify youth user",
+        "category": "Age Classification",
+        "salience": 700,
+        "certainty_factor": 1.0,
+        "conditions": [
+            "User age is known",
+            "Age is below 18"
+        ],
+        "actions": [
+            "Set age_group = youth"
+        ],
+        "explanation": "Youth users require conservative exercise programming and supervision-focused recommendations."
+    },
+    {
+        "rule_id": "R-AGE-002",
+        "name": "Classify adult user",
+        "category": "Age Classification",
+        "salience": 700,
+        "certainty_factor": 1.0,
+        "conditions": [
+            "User age is known",
+            "Age is between 18 and 59"
+        ],
+        "actions": [
+            "Set age_group = adult"
+        ],
+        "explanation": "Adult users can usually follow standard training recommendations unless limited by injuries or medical conditions."
+    },
+    {
+        "rule_id": "R-AGE-003",
+        "name": "Classify senior user",
+        "category": "Age Classification",
+        "salience": 700,
+        "certainty_factor": 1.0,
+        "conditions": [
+            "User age is known",
+            "Age is 60 or above"
+        ],
+        "actions": [
+            "Set age_group = senior"
+        ],
+        "explanation": "Senior users need joint-friendly programming, longer warm-ups, and careful intensity progression."
+    },
+    {
+        "rule_id": "R-AGE-004",
+        "name": "Apply youth safety emphasis",
+        "category": "Age Classification",
+        "salience": 800,
+        "certainty_factor": 0.9,
+        "conditions": [
+            "age_group is youth"
+        ],
+        "actions": [
+            "Set needs_supervision_focus = True"
+        ],
+        "explanation": "Youth training should avoid ego lifting and focus on safe movement learning."
+    },
+    {
+        "rule_id": "R-AGE-005",
+        "name": "Apply senior low-impact preference",
+        "category": "Age Classification",
+        "salience": 800,
+        "certainty_factor": 0.85,
+        "conditions": [
+            "age_group is senior"
+        ],
+        "actions": [
+            "Set needs_low_impact_training = True"
+        ],
+        "explanation": "Senior users may have higher joint stress risk, so lower-impact training is preferred."
+    },
+    {
+        "rule_id": "R-BMI-001",
+        "name": "Classify underweight BMI",
+        "category": "BMI Classification",
+        "salience": 700,
+        "certainty_factor": 1.0,
+        "conditions": [
+            "BMI is known",
+            "BMI is below 18.5"
+        ],
+        "actions": [
+            "Set bmi_category = underweight"
+        ],
+        "explanation": "Underweight users may need conservative volume and strength-building focus."
+    },
+    {
+        "rule_id": "R-BMI-002",
+        "name": "Classify normal BMI",
+        "category": "BMI Classification",
+        "salience": 700,
+        "certainty_factor": 1.0,
+        "conditions": [
+            "BMI is known",
+            "BMI is between 18.5 and 24.9"
+        ],
+        "actions": [
+            "Set bmi_category = normal"
+        ],
+        "explanation": "Normal BMI allows standard program selection based mainly on goal, experience, and equipment."
+    },
+    {
+        "rule_id": "R-BMI-003",
+        "name": "Classify overweight BMI",
+        "category": "BMI Classification",
+        "salience": 700,
+        "certainty_factor": 1.0,
+        "conditions": [
+            "BMI is known",
+            "BMI is between 25 and 29.9"
+        ],
+        "actions": [
+            "Set bmi_category = overweight"
+        ],
+        "explanation": "Overweight BMI may increase joint loading, especially during jumping or running."
+    },
+    {
+        "rule_id": "R-BMI-004",
+        "name": "Classify obese BMI",
+        "category": "BMI Classification",
+        "salience": 700,
+        "certainty_factor": 1.0,
+        "conditions": [
+            "BMI is known",
+            "BMI is 30 or above"
+        ],
+        "actions": [
+            "Set bmi_category = obese"
+        ],
+        "explanation": "Obese BMI increases the importance of low-impact conditioning and gradual progression."
+    },
+    {
+        "rule_id": "R-BMI-005",
+        "name": "Detect joint stress risk for overweight user",
+        "category": "BMI Classification",
+        "salience": 700,
+        "certainty_factor": 0.75,
+        "conditions": [
+            "bmi_category is overweight"
+        ],
+        "actions": [
+            "Set joint_stress_risk = moderate"
+        ],
+        "explanation": "Extra body mass can increase knee and ankle stress during impact-based activities."
+    },
+    {
+        "rule_id": "R-BMI-006",
+        "name": "Detect joint stress risk for obese user",
+        "category": "BMI Classification",
+        "salience": 700,
+        "certainty_factor": 0.9,
+        "conditions": [
+            "bmi_category is obese"
+        ],
+        "actions": [
+            "Set joint_stress_risk = high"
+        ],
+        "explanation": "Higher BMI can increase impact forces, so safer low-impact training is preferred."
+    },
+    {
+        "rule_id": "R-BMI-007",
+        "name": "Prefer low-impact training for high joint stress",
+        "category": "BMI Classification",
+        "salience": 900,
+        "certainty_factor": 0.9,
+        "conditions": [
+            "joint_stress_risk is high"
+        ],
+        "actions": [
+            "Set needs_low_impact_training = True"
+        ],
+        "explanation": "Low-impact training reduces unnecessary stress on knees, hips, and ankles."
+    },
+    {
+        "rule_id": "R-EXP-001",
+        "name": "Set beginner training volume",
+        "category": "Experience Analysis",
+        "salience": 450,
+        "certainty_factor": 0.95,
+        "conditions": [
+            "experience_level is beginner"
+        ],
+        "actions": [
+            "Set training_volume = low"
+        ],
+        "explanation": "Beginners need lower training volume to learn technique and avoid excessive soreness."
+    },
+    {
+        "rule_id": "R-EXP-002",
+        "name": "Set intermediate training volume",
+        "category": "Experience Analysis",
+        "salience": 450,
+        "certainty_factor": 0.9,
+        "conditions": [
+            "experience_level is intermediate"
+        ],
+        "actions": [
+            "Set training_volume = moderate"
+        ],
+        "explanation": "Intermediate users usually have enough skill and recovery capacity for moderate weekly volume."
+    },
+    {
+        "rule_id": "R-EXP-003",
+        "name": "Set advanced training volume",
+        "category": "Experience Analysis",
+        "salience": 450,
+        "certainty_factor": 0.85,
+        "conditions": [
+            "experience_level is advanced"
+        ],
+        "actions": [
+            "Set training_volume = high"
+        ],
+        "explanation": "Advanced users can use more volume and intensity, but injury rules still override this."
+    },
+    {
+        "rule_id": "R-EXP-004",
+        "name": "Add beginner technique priority",
+        "category": "Experience Analysis",
+        "salience": 450,
+        "certainty_factor": 0.95,
+        "conditions": [
+            "experience_level is beginner"
+        ],
+        "actions": [
+            "Set needs_technique_focus = True"
+        ],
+        "explanation": "Technique focus reduces injury risk and improves long-term progression."
+    },
+    {
+        "rule_id": "R-EXP-005",
+        "name": "Allow advanced progression strategy",
+        "category": "Experience Analysis",
+        "salience": 450,
+        "certainty_factor": 0.85,
+        "conditions": [
+            "experience_level is advanced",
+            "No injuries are reported"
+        ],
+        "actions": [
+            "Set progression_style = advanced_progressive_overload"
+        ],
+        "explanation": "Advanced users without injuries can progress load, reps, or volume more aggressively."
+    },
+    {
+        "rule_id": "R-SCH-001",
+        "name": "Select two-day full body split",
+        "category": "Schedule Analysis",
+        "salience": 400,
+        "certainty_factor": 0.95,
+        "conditions": [
+            "available_days is known",
+            "available_days is 1 or 2"
+        ],
+        "actions": [
+            "Set training_split = full_body"
+        ],
+        "explanation": "With limited weekly availability, full-body sessions cover major movement patterns efficiently."
+    },
+    {
+        "rule_id": "R-SCH-002",
+        "name": "Select three-day full body split",
+        "category": "Schedule Analysis",
+        "salience": 400,
+        "certainty_factor": 0.95,
+        "conditions": [
+            "available_days is 3"
+        ],
+        "actions": [
+            "Set training_split = three_day_full_body"
+        ],
+        "explanation": "A three-day full-body plan balances frequency, recovery, and simplicity."
+    },
+    {
+        "rule_id": "R-SCH-003",
+        "name": "Select four-day upper lower split",
+        "category": "Schedule Analysis",
+        "salience": 400,
+        "certainty_factor": 0.95,
+        "conditions": [
+            "available_days is 4"
+        ],
+        "actions": [
+            "Set training_split = upper_lower"
+        ],
+        "explanation": "Upper/lower split provides good frequency and recovery for four weekly sessions."
+    },
+    {
+        "rule_id": "R-SCH-004",
+        "name": "Select five-day hybrid split",
+        "category": "Schedule Analysis",
+        "salience": 400,
+        "certainty_factor": 0.9,
+        "conditions": [
+            "available_days is 5"
+        ],
+        "actions": [
+            "Set training_split = hybrid_strength_conditioning"
+        ],
+        "explanation": "Five weekly days allow more specialization while still preserving recovery."
+    },
+    {
+        "rule_id": "R-SCH-005",
+        "name": "Select six day push pull legs split",
+        "category": "Schedule Analysis",
+        "salience": 400,
+        "certainty_factor": 0.85,
+        "conditions": [
+            "available_days is known",
+            "available_days is 6 or more"
+        ],
+        "actions": [
+            "Set training_split = push_pull_legs"
+        ],
+        "explanation": "Push/pull/legs works well for frequent training but must be adjusted if safety risks exist."
+    },
+    {
+        "rule_id": "R-EQP-001",
+        "name": "Classify full gym equipment",
+        "category": "Equipment Analysis",
+        "salience": 600,
+        "certainty_factor": 1.0,
+        "conditions": [
+            "equipment is full_gym"
+        ],
+        "actions": [
+            "Set equipment_level = full"
+        ],
+        "explanation": "Full gym access allows machines, barbells, dumbbells, and cardio equipment."
+    },
+    {
+        "rule_id": "R-EQP-002",
+        "name": "Classify dumbbell home equipment",
+        "category": "Equipment Analysis",
+        "salience": 600,
+        "certainty_factor": 1.0,
+        "conditions": [
+            "equipment is home_dumbbells"
+        ],
+        "actions": [
+            "Set equipment_level = limited_weights"
+        ],
+        "explanation": "Dumbbells support many strength exercises but limit heavy barbell-style progression."
+    },
+    {
+        "rule_id": "R-EQP-003",
+        "name": "Classify bodyweight-only equipment",
+        "category": "Equipment Analysis",
+        "salience": 600,
+        "certainty_factor": 1.0,
+        "conditions": [
+            "equipment is bodyweight_only"
+        ],
+        "actions": [
+            "Set equipment_level = bodyweight"
+        ],
+        "explanation": "Bodyweight training requires exercise progressions using leverage, tempo, and volume."
+    },
+    {
+        "rule_id": "R-EQP-004",
+        "name": "Prefer dumbbell variations",
+        "category": "Equipment Analysis",
+        "salience": 600,
+        "certainty_factor": 0.95,
+        "conditions": [
+            "equipment_level is limited_weights"
+        ],
+        "actions": [
+            "Set exercise_selection_style = dumbbell_based"
+        ],
+        "explanation": "Home dumbbell users need exercises that match available equipment."
+    },
+    {
+        "rule_id": "R-EQP-005",
+        "name": "Prefer bodyweight progressions",
+        "category": "Equipment Analysis",
+        "salience": 600,
+        "certainty_factor": 0.95,
+        "conditions": [
+            "equipment_level is bodyweight"
+        ],
+        "actions": [
+            "Set exercise_selection_style = bodyweight_progressions"
+        ],
+        "explanation": "Bodyweight-only users need movements such as squats, push-ups, bridges, planks, and progressions."
+    },
+    {
+        "rule_id": "R-EQP-006",
+        "name": "Allow machine-supported exercise options",
+        "category": "Equipment Analysis",
+        "salience": 600,
+        "certainty_factor": 0.95,
+        "conditions": [
+            "equipment_level is full"
+        ],
+        "actions": [
+            "Set exercise_selection_style = full_gym_options"
+        ],
+        "explanation": "A full gym allows safer machine alternatives, free-weight lifts, and cardio equipment."
+    },
+    {
+        "rule_id": "R-MED-001",
+        "name": "Detect no medical condition",
+        "category": "Medical Safety",
+        "salience": 1000,
+        "certainty_factor": 1.0,
+        "conditions": [
+            "condition_none is True"
+        ],
+        "actions": [
+            "Set medical_restriction_level = none"
+        ],
+        "explanation": "No reported medical condition means normal exercise screening can continue."
+    },
+    {
+        "rule_id": "R-MED-002",
+        "name": "Detect asthma condition",
+        "category": "Medical Safety",
+        "salience": 1000,
+        "certainty_factor": 0.9,
+        "conditions": [
+            "condition_asthma is True"
+        ],
+        "actions": [
+            "Set cardio_caution_required = True"
+        ],
+        "explanation": "Asthma may affect tolerance to intense cardio, so gradual warm-up and controlled intensity are preferred."
+    },
+    {
+        "rule_id": "R-MED-003",
+        "name": "Recommend extended warm-up for asthma",
+        "category": "Medical Safety",
+        "salience": 1000,
+        "certainty_factor": 0.9,
+        "conditions": [
+            "cardio_caution_required is True"
+        ],
+        "actions": [
+            "Set requires_extended_warmup = True"
+        ],
+        "explanation": "A longer warm-up can reduce sudden intensity spikes for users with asthma."
+    },
+    {
+        "rule_id": "R-MED-004",
+        "name": "Use controlled endurance protocol for asthma",
+        "category": "Medical Safety",
+        "salience": 1000,
+        "certainty_factor": 0.85,
+        "conditions": [
+            "condition_asthma is True",
+            "goal is endurance"
+        ],
+        "actions": [
+            "Set endurance_protocol = controlled_low_to_moderate_intensity"
+        ],
+        "explanation": "Endurance training can still be used, but intensity should progress gradually for asthma users."
+    },
+    {
+        "rule_id": "R-INJ-001",
+        "name": "Detect no injury",
+        "category": "Injury Safety",
+        "salience": 900,
+        "certainty_factor": 1.0,
+        "conditions": [
+            "injury_none is True"
+        ],
+        "actions": [
+            "Set injury_restriction_level = none"
+        ],
+        "explanation": "No reported injury means normal exercise selection can continue."
+    },
+    {
+        "rule_id": "R-INJ-002",
+        "name": "Detect mild knee limitation",
+        "category": "Injury Safety",
+        "salience": 900,
+        "certainty_factor": 0.8,
+        "conditions": [
+            "injury_knee is mild"
+        ],
+        "actions": [
+            "Set knee_risk_level = mild"
+        ],
+        "explanation": "Mild knee discomfort does not fully block lower-body training but requires careful movement selection."
+    },
+    {
+        "rule_id": "R-INJ-003",
+        "name": "Detect moderate knee limitation",
+        "category": "Injury Safety",
+        "salience": 900,
+        "certainty_factor": 0.9,
+        "conditions": [
+            "injury_knee is moderate"
+        ],
+        "actions": [
+            "Set knee_risk_level = moderate"
+        ],
+        "explanation": "Moderate knee issues require avoiding jumping, sprinting, and deep knee-dominant exercises."
+    },
+    {
+        "rule_id": "R-INJ-004",
+        "name": "Detect severe knee limitation",
+        "category": "Injury Safety",
+        "salience": 1000,
+        "certainty_factor": 0.95,
+        "conditions": [
+            "injury_knee is severe"
+        ],
+        "actions": [
+            "Set medical_clearance_required = True"
+        ],
+        "explanation": "Severe knee pain should be evaluated before exercise recommendations are intensified."
+    },
+    {
+        "rule_id": "R-INJ-005",
+        "name": "Prefer knee-safe training",
+        "category": "Injury Safety",
+        "salience": 900,
+        "certainty_factor": 0.9,
+        "conditions": [
+            "knee_risk_level is mild or moderate"
+        ],
+        "actions": [
+            "Set needs_knee_safe_training = True"
+        ],
+        "explanation": "Knee-safe training reduces high-impact movements and limits painful ranges of motion."
+    },
+    {
+        "rule_id": "R-INJ-006",
+        "name": "Avoid high impact for knee risk",
+        "category": "Injury Safety",
+        "salience": 900,
+        "certainty_factor": 0.9,
+        "conditions": [
+            "needs_knee_safe_training is True"
+        ],
+        "actions": [
+            "Set avoid_high_impact = True"
+        ],
+        "explanation": "Jumping, sprinting, and aggressive plyometrics can aggravate knee symptoms."
+    },
+    {
+        "rule_id": "R-INJ-007",
+        "name": "Detect lower back limitation",
+        "category": "Injury Safety",
+        "salience": 900,
+        "certainty_factor": 0.9,
+        "conditions": [
+            "Lower back injury fact exists",
+            "Lower back injury severity is mild, moderate, or severe"
+        ],
+        "actions": [
+            "Set back_risk_level = present"
+        ],
+        "explanation": "Lower back issues require careful core stability and avoidance of heavy spinal loading."
+    },
+    {
+        "rule_id": "R-INJ-008",
+        "name": "Avoid heavy spinal loading",
+        "category": "Injury Safety",
+        "salience": 900,
+        "certainty_factor": 0.9,
+        "conditions": [
+            "back_risk_level is present"
+        ],
+        "actions": [
+            "Set avoid_heavy_spinal_loading = True"
+        ],
+        "explanation": "Heavy axial loading may aggravate lower back symptoms."
+    },
+    {
+        "rule_id": "R-INJ-009",
+        "name": "Detect severe lower back issue",
+        "category": "Injury Safety",
+        "salience": 1000,
+        "certainty_factor": 0.95,
+        "conditions": [
+            "injury_lower_back is severe"
+        ],
+        "actions": [
+            "Set medical_clearance_required = True"
+        ],
+        "explanation": "Severe back pain should be cleared by a professional before exercise intensity is increased."
+    },
+    {
+        "rule_id": "R-INJ-010",
+        "name": "Detect shoulder limitation",
+        "category": "Injury Safety",
+        "salience": 900,
+        "certainty_factor": 0.9,
+        "conditions": [
+            "Shoulder injury fact exists",
+            "Shoulder injury severity is mild, moderate, or severe"
+        ],
+        "actions": [
+            "Set shoulder_risk_level = present"
+        ],
+        "explanation": "Shoulder limitations require safer pressing angles and avoidance of painful overhead work."
+    },
+    {
+        "rule_id": "R-INJ-011",
+        "name": "Avoid overhead pressing for shoulder risk",
+        "category": "Injury Safety",
+        "salience": 900,
+        "certainty_factor": 0.85,
+        "conditions": [
+            "shoulder_risk_level is present"
+        ],
+        "actions": [
+            "Set avoid_overhead_pressing = True"
+        ],
+        "explanation": "Overhead pressing can aggravate shoulder pain if mobility or stability is limited."
+    },
+    {
+        "rule_id": "R-INJ-012",
+        "name": "Detect severe shoulder issue",
+        "category": "Injury Safety",
+        "salience": 1000,
+        "certainty_factor": 0.95,
+        "conditions": [
+            "injury_shoulder is severe"
+        ],
+        "actions": [
+            "Set medical_clearance_required = True"
+        ],
+        "explanation": "Severe shoulder pain should be professionally assessed before upper-body loading."
+    },
+    {
+        "rule_id": "R-GOAL-001",
+        "name": "Set strength goal direction",
+        "category": "Goal Analysis",
+        "salience": 500,
+        "certainty_factor": 0.95,
+        "conditions": [
+            "goal is strength"
+        ],
+        "actions": [
+            "Set goal_direction = strength_focused"
+        ],
+        "explanation": "Strength goals prioritize compound movements, progressive overload, and lower-to-moderate rep ranges."
+    },
+    {
+        "rule_id": "R-GOAL-002",
+        "name": "Set muscle gain goal direction",
+        "category": "Goal Analysis",
+        "salience": 500,
+        "certainty_factor": 0.95,
+        "conditions": [
+            "goal is muscle_gain"
+        ],
+        "actions": [
+            "Set goal_direction = hypertrophy_focused"
+        ],
+        "explanation": "Muscle gain goals prioritize moderate volume, controlled tempo, and progressive resistance."
+    },
+    {
+        "rule_id": "R-GOAL-003",
+        "name": "Set fat loss goal direction",
+        "category": "Goal Analysis",
+        "salience": 500,
+        "certainty_factor": 0.95,
+        "conditions": [
+            "goal is fat_loss"
+        ],
+        "actions": [
+            "Set goal_direction = fat_loss_focused"
+        ],
+        "explanation": "Fat loss goals benefit from resistance training plus conditioning while preserving safety."
+    },
+    {
+        "rule_id": "R-GOAL-004",
+        "name": "Set endurance goal direction",
+        "category": "Goal Analysis",
+        "salience": 500,
+        "certainty_factor": 0.95,
+        "conditions": [
+            "goal is endurance"
+        ],
+        "actions": [
+            "Set goal_direction = endurance_focused"
+        ],
+        "explanation": "Endurance goals prioritize cardiovascular capacity, pacing, and gradual workload progression."
+    },
+    {
+        "rule_id": "R-GOAL-005",
+        "name": "Set flexibility goal direction",
+        "category": "Goal Analysis",
+        "salience": 500,
+        "certainty_factor": 0.95,
+        "conditions": [
+            "goal is flexibility"
+        ],
+        "actions": [
+            "Set goal_direction = mobility_focused"
+        ],
+        "explanation": "Flexibility goals prioritize mobility, stretching, range of motion, and controlled movement quality."
+    },
+    {
+        "rule_id": "R-GOAL-006",
+        "name": "Prefer low-impact fat loss when overweight",
+        "category": "Program Direction",
+        "salience": 300,
+        "certainty_factor": 0.85,
+        "conditions": [
+            "goal_direction is fat_loss_focused",
+            "bmi_category is overweight or obese"
+        ],
+        "actions": [
+            "Set conditioning_style = low_impact_fat_loss"
+        ],
+        "explanation": "Low-impact conditioning supports fat loss while reducing unnecessary joint stress."
+    },
+    {
+        "rule_id": "R-GOAL-007",
+        "name": "Prefer technique-first strength for beginners",
+        "category": "Program Direction",
+        "salience": 300,
+        "certainty_factor": 0.9,
+        "conditions": [
+            "goal_direction is strength_focused",
+            "experience_level is beginner"
+        ],
+        "actions": [
+            "Set program_emphasis = technique_first_strength"
+        ],
+        "explanation": "Beginner strength training should build skill before heavier loading."
+    },
+    {
+        "rule_id": "R-GOAL-008",
+        "name": "Prefer mobility base for flexibility goal",
+        "category": "Program Direction",
+        "salience": 300,
+        "certainty_factor": 0.9,
+        "conditions": [
+            "goal_direction is mobility_focused"
+        ],
+        "actions": [
+            "Set program_emphasis = mobility_and_control"
+        ],
+        "explanation": "Flexibility improves best when stretching is combined with controlled range-of-motion practice."
+    },
+    {
+        "rule_id": "R-INT-001",
+        "name": "Set strength intensity profile",
+        "category": "Program Direction",
+        "salience": 300,
+        "certainty_factor": 0.9,
+        "conditions": [
+            "goal_direction is strength_focused"
+        ],
+        "actions": [
+            "Set intensity_profile = strength_low_reps_progressive_load"
+        ],
+        "explanation": "Strength programs usually emphasize heavier resistance, lower repetitions, and gradual load progression."
+    },
+    {
+        "rule_id": "R-INT-002",
+        "name": "Set hypertrophy intensity profile",
+        "category": "Program Direction",
+        "salience": 300,
+        "certainty_factor": 0.9,
+        "conditions": [
+            "goal_direction is hypertrophy_focused"
+        ],
+        "actions": [
+            "Set intensity_profile = moderate_reps_muscle_tension"
+        ],
+        "explanation": "Hypertrophy training benefits from moderate repetitions, sufficient volume, and controlled movement tempo."
+    },
+    {
+        "rule_id": "R-INT-003",
+        "name": "Set fat-loss intensity profile",
+        "category": "Program Direction",
+        "salience": 300,
+        "certainty_factor": 0.9,
+        "conditions": [
+            "goal_direction is fat_loss_focused"
+        ],
+        "actions": [
+            "Set intensity_profile = resistance_plus_conditioning"
+        ],
+        "explanation": "Fat-loss programs should combine strength work with safe conditioning to improve energy expenditure while preserving muscle."
+    },
+    {
+        "rule_id": "R-INT-004",
+        "name": "Set endurance intensity profile",
+        "category": "Program Direction",
+        "salience": 300,
+        "certainty_factor": 0.9,
+        "conditions": [
+            "goal_direction is endurance_focused"
+        ],
+        "actions": [
+            "Set intensity_profile = aerobic_base_progression"
+        ],
+        "explanation": "Endurance training should gradually build aerobic capacity before intense intervals are emphasized."
+    },
+    {
+        "rule_id": "R-INT-005",
+        "name": "Set flexibility intensity profile",
+        "category": "Program Direction",
+        "salience": 300,
+        "certainty_factor": 0.9,
+        "conditions": [
+            "goal_direction is mobility_focused"
+        ],
+        "actions": [
+            "Set intensity_profile = controlled_mobility_and_stretching"
+        ],
+        "explanation": "Flexibility-focused users should prioritize controlled range of motion, breathing, and gradual stretch tolerance."
+    },
+    {
+        "rule_id": "R-INT-006",
+        "name": "Override intensity when medical clearance is required",
+        "category": "Medical Safety",
+        "salience": 1000,
+        "certainty_factor": 0.95,
+        "conditions": [
+            "medical_clearance_required is True"
+        ],
+        "actions": [
+            "Set intensity_profile = clearance_required_before_training"
+        ],
+        "explanation": "Safety rules override normal training rules when severe injury risk is present."
+    },
+    {
+        "rule_id": "R-VOL-001",
+        "name": "Assign beginner set scheme",
+        "category": "Experience Analysis",
+        "salience": 450,
+        "certainty_factor": 0.9,
+        "conditions": [
+            "training_volume is low"
+        ],
+        "actions": [
+            "Set set_scheme = 2_to_3_sets_per_exercise"
+        ],
+        "explanation": "Beginners should start with fewer sets to learn technique and recover well."
+    },
+    {
+        "rule_id": "R-VOL-002",
+        "name": "Assign intermediate set scheme",
+        "category": "Experience Analysis",
+        "salience": 450,
+        "certainty_factor": 0.9,
+        "conditions": [
+            "training_volume is moderate"
+        ],
+        "actions": [
+            "Set set_scheme = 3_to_4_sets_per_exercise"
+        ],
+        "explanation": "Intermediate users can usually handle moderate set volume while still recovering effectively."
+    },
+    {
+        "rule_id": "R-VOL-003",
+        "name": "Assign advanced set scheme",
+        "category": "Experience Analysis",
+        "salience": 450,
+        "certainty_factor": 0.85,
+        "conditions": [
+            "training_volume is high"
+        ],
+        "actions": [
+            "Set set_scheme = 4_to_5_sets_per_main_exercise"
+        ],
+        "explanation": "Advanced users may benefit from higher volume if safety restrictions do not override it."
+    },
+    {
+        "rule_id": "R-VOL-004",
+        "name": "Assign strength rep range",
+        "category": "Goal Analysis",
+        "salience": 500,
+        "certainty_factor": 0.9,
+        "conditions": [
+            "goal_direction is strength_focused"
+        ],
+        "actions": [
+            "Set rep_range = 3_to_6_reps"
+        ],
+        "explanation": "Lower repetition ranges support strength development when paired with safe progressive loading."
+    },
+    {
+        "rule_id": "R-VOL-005",
+        "name": "Assign hypertrophy rep range",
+        "category": "Goal Analysis",
+        "salience": 500,
+        "certainty_factor": 0.9,
+        "conditions": [
+            "goal_direction is hypertrophy_focused"
+        ],
+        "actions": [
+            "Set rep_range = 8_to_12_reps"
+        ],
+        "explanation": "Moderate repetition ranges are commonly used for muscle-building programs."
+    },
+    {
+        "rule_id": "R-VOL-006",
+        "name": "Assign fat-loss rep range",
+        "category": "Goal Analysis",
+        "salience": 500,
+        "certainty_factor": 0.85,
+        "conditions": [
+            "goal_direction is fat_loss_focused"
+        ],
+        "actions": [
+            "Set rep_range = 10_to_15_reps"
+        ],
+        "explanation": "Moderate-to-higher reps can support conditioning and movement practice during fat-loss programs."
+    },
+    {
+        "rule_id": "R-VOL-007",
+        "name": "Assign endurance session duration",
+        "category": "Goal Analysis",
+        "salience": 500,
+        "certainty_factor": 0.9,
+        "conditions": [
+            "goal_direction is endurance_focused"
+        ],
+        "actions": [
+            "Set cardio_duration = 20_to_40_minutes"
+        ],
+        "explanation": "Endurance development requires sustained cardiovascular work with gradual progression."
+    },
+    {
+        "rule_id": "R-VOL-008",
+        "name": "Assign flexibility session duration",
+        "category": "Goal Analysis",
+        "salience": 500,
+        "certainty_factor": 0.9,
+        "conditions": [
+            "goal_direction is mobility_focused"
+        ],
+        "actions": [
+            "Set mobility_duration = 10_to_20_minutes_daily_or_near_daily"
+        ],
+        "explanation": "Flexibility improves through consistent practice rather than rare high-intensity sessions."
+    },
+    {
+        "rule_id": "R-VOL-009",
+        "name": "Apply conservative volume modifier for senior users",
+        "category": "Age Classification",
+        "salience": 800,
+        "certainty_factor": 0.85,
+        "conditions": [
+            "age_group is senior"
+        ],
+        "actions": [
+            "Set volume_modifier = conservative_progression"
+        ],
+        "explanation": "Conservative progression helps reduce recovery and joint-stress problems in senior users."
+    },
+    {
+        "rule_id": "R-EXS-001",
+        "name": "Select full-gym strength exercise mode",
+        "category": "Equipment Analysis",
+        "salience": 600,
+        "certainty_factor": 0.9,
+        "conditions": [
+            "goal_direction is strength_focused",
+            "equipment_level is full"
+        ],
+        "actions": [
+            "Set primary_resistance_mode = compound_lifts_with_machine_support"
+        ],
+        "explanation": "Full gym access allows compound strength training plus safer machine-supported alternatives."
+    },
+    {
+        "rule_id": "R-EXS-002",
+        "name": "Select dumbbell strength exercise mode",
+        "category": "Equipment Analysis",
+        "salience": 600,
+        "certainty_factor": 0.88,
+        "conditions": [
+            "goal_direction is strength_focused",
+            "equipment_level is limited_weights"
+        ],
+        "actions": [
+            "Set primary_resistance_mode = dumbbell_compound_lifts"
+        ],
+        "explanation": "Dumbbells can support strength work through goblet squats, presses, rows, Romanian deadlifts, and split squats."
+    },
+    {
+        "rule_id": "R-EXS-003",
+        "name": "Select bodyweight strength exercise mode",
+        "category": "Equipment Analysis",
+        "salience": 600,
+        "certainty_factor": 0.85,
+        "conditions": [
+            "goal_direction is strength_focused",
+            "equipment_level is bodyweight"
+        ],
+        "actions": [
+            "Set primary_resistance_mode = bodyweight_strength_progressions"
+        ],
+        "explanation": "Without weights, strength progression can come from harder movement variations, tempo, pauses, and unilateral work."
+    },
+    {
+        "rule_id": "R-EXS-004",
+        "name": "Select full-gym hypertrophy exercise mode",
+        "category": "Equipment Analysis",
+        "salience": 600,
+        "certainty_factor": 0.9,
+        "conditions": [
+            "goal_direction is hypertrophy_focused",
+            "equipment_level is full"
+        ],
+        "actions": [
+            "Set primary_resistance_mode = machines_cables_and_free_weights"
+        ],
+        "explanation": "Hypertrophy training benefits from multiple exercise angles and stable machine or cable options."
+    },
+    {
+        "rule_id": "R-EXS-005",
+        "name": "Select dumbbell hypertrophy exercise mode",
+        "category": "Equipment Analysis",
+        "salience": 600,
+        "certainty_factor": 0.88,
+        "conditions": [
+            "goal_direction is hypertrophy_focused",
+            "equipment_level is limited_weights"
+        ],
+        "actions": [
+            "Set primary_resistance_mode = dumbbell_hypertrophy_training"
+        ],
+        "explanation": "Dumbbells can support muscle gain through presses, rows, lunges, curls, raises, and controlled tempo work."
+    },
+    {
+        "rule_id": "R-EXS-006",
+        "name": "Select bodyweight hypertrophy exercise mode",
+        "category": "Equipment Analysis",
+        "salience": 600,
+        "certainty_factor": 0.82,
+        "conditions": [
+            "goal_direction is hypertrophy_focused",
+            "equipment_level is bodyweight"
+        ],
+        "actions": [
+            "Set primary_resistance_mode = bodyweight_volume_training"
+        ],
+        "explanation": "Bodyweight hypertrophy depends on sufficient volume, controlled tempo, and harder variations."
+    },
+    {
+        "rule_id": "R-EXS-007",
+        "name": "Select bodyweight fat-loss circuit mode",
+        "category": "Equipment Analysis",
+        "salience": 600,
+        "certainty_factor": 0.85,
+        "conditions": [
+            "goal_direction is fat_loss_focused",
+            "equipment_level is bodyweight"
+        ],
+        "actions": [
+            "Set primary_resistance_mode = bodyweight_circuit_training"
+        ],
+        "explanation": "Bodyweight circuits can improve conditioning without needing equipment."
+    },
+    {
+        "rule_id": "R-EXS-008",
+        "name": "Select dumbbell fat-loss circuit mode",
+        "category": "Equipment Analysis",
+        "salience": 600,
+        "certainty_factor": 0.88,
+        "conditions": [
+            "goal_direction is fat_loss_focused",
+            "equipment_level is limited_weights"
+        ],
+        "actions": [
+            "Set primary_resistance_mode = dumbbell_circuit_training"
+        ],
+        "explanation": "Dumbbell circuits combine resistance training and conditioning while fitting home equipment constraints."
+    },
+    {
+        "rule_id": "R-EXS-009",
+        "name": "Select full-gym endurance mode",
+        "category": "Equipment Analysis",
+        "salience": 600,
+        "certainty_factor": 0.9,
+        "conditions": [
+            "goal_direction is endurance_focused",
+            "equipment_level is full"
+        ],
+        "actions": [
+            "Set primary_cardio_mode = cardio_machine_supported"
+        ],
+        "explanation": "Full gym access provides multiple cardio tools, allowing safer selection based on joint tolerance."
+    },
+    {
+        "rule_id": "R-EXS-010",
+        "name": "Select flexibility exercise mode",
+        "category": "Goal Analysis",
+        "salience": 500,
+        "certainty_factor": 0.9,
+        "conditions": [
+            "goal_direction is mobility_focused"
+        ],
+        "actions": [
+            "Set primary_mobility_mode = mobility_flow_and_static_stretching"
+        ],
+        "explanation": "A combination of controlled mobility and static stretching supports flexibility goals."
+    },
+    {
+        "rule_id": "R-SUB-001",
+        "name": "Select knee-safe lower-body substitutions",
+        "category": "Injury Safety",
+        "salience": 900,
+        "certainty_factor": 0.9,
+        "conditions": [
+            "needs_knee_safe_training is True"
+        ],
+        "actions": [
+            "Set knee_safe_lower_body_options = glute_bridge_box_squat_step_up_partial_range"
+        ],
+        "explanation": "Knee-safe lower-body choices reduce painful knee flexion and high-impact loading."
+    },
+    {
+        "rule_id": "R-SUB-002",
+        "name": "Select knee-safe cardio substitutions",
+        "category": "Injury Safety",
+        "salience": 900,
+        "certainty_factor": 0.9,
+        "conditions": [
+            "needs_knee_safe_training is True"
+        ],
+        "actions": [
+            "Set knee_safe_cardio_options = walking_cycling_elliptical_if_available"
+        ],
+        "explanation": "Walking, cycling, and elliptical-style conditioning are usually lower impact than jumping or sprinting."
+    },
+    {
+        "rule_id": "R-SUB-003",
+        "name": "Avoid deep knee flexion when knee risk exists",
+        "category": "Injury Safety",
+        "salience": 900,
+        "certainty_factor": 0.85,
+        "conditions": [
+            "needs_knee_safe_training is True"
+        ],
+        "actions": [
+            "Set avoid_deep_knee_flexion = True"
+        ],
+        "explanation": "Deep knee flexion may aggravate symptoms in some users with knee limitations."
+    },
+    {
+        "rule_id": "R-SUB-004",
+        "name": "Select lower-back-safe lower-body substitutions",
+        "category": "Injury Safety",
+        "salience": 900,
+        "certainty_factor": 0.9,
+        "conditions": [
+            "back_risk_level is present"
+        ],
+        "actions": [
+            "Set back_safe_lower_body_options = glute_bridge_bird_dog_supported_split_squat"
+        ],
+        "explanation": "Back-safe substitutions reduce heavy spinal loading and emphasize controlled stability."
+    },
+    {
+        "rule_id": "R-SUB-005",
+        "name": "Select back-safe core training style",
+        "category": "Injury Safety",
+        "salience": 900,
+        "certainty_factor": 0.9,
+        "conditions": [
+            "back_risk_level is present"
+        ],
+        "actions": [
+            "Set core_training_style = anti_extension_and_anti_rotation_core"
+        ],
+        "explanation": "Anti-extension and anti-rotation core work can build trunk stability without repeated spinal flexion."
+    },
+    {
+        "rule_id": "R-SUB-006",
+        "name": "Avoid loaded hip hinges when back risk exists",
+        "category": "Injury Safety",
+        "salience": 900,
+        "certainty_factor": 0.85,
+        "conditions": [
+            "back_risk_level is present"
+        ],
+        "actions": [
+            "Set avoid_loaded_hinges = True"
+        ],
+        "explanation": "Heavy loaded hinges may aggravate lower-back symptoms if tolerance is limited."
+    },
+    {
+        "rule_id": "R-SUB-007",
+        "name": "Select shoulder-safe pressing options",
+        "category": "Injury Safety",
+        "salience": 900,
+        "certainty_factor": 0.88,
+        "conditions": [
+            "shoulder_risk_level is present"
+        ],
+        "actions": [
+            "Set shoulder_safe_pressing_options = neutral_grip_press_floor_pushup_landmine_if_available"
+        ],
+        "explanation": "Neutral-grip and reduced-range pressing options are often more shoulder-friendly than painful overhead pressing."
+    },
+    {
+        "rule_id": "R-SUB-008",
+        "name": "Prioritize pulling balance for shoulder risk",
+        "category": "Injury Safety",
+        "salience": 900,
+        "certainty_factor": 0.85,
+        "conditions": [
+            "shoulder_risk_level is present"
+        ],
+        "actions": [
+            "Set upper_body_balance_priority = rows_rear_delts_scapular_control"
+        ],
+        "explanation": "Rows, rear-delt work, and scapular control can support shoulder-friendly upper-body programming."
+    },
+    {
+        "rule_id": "R-SUB-009",
+        "name": "Avoid upright rows for shoulder risk",
+        "category": "Injury Safety",
+        "salience": 900,
+        "certainty_factor": 0.85,
+        "conditions": [
+            "shoulder_risk_level is present"
+        ],
+        "actions": [
+            "Set avoid_upright_rows = True"
+        ],
+        "explanation": "Upright rows can place the shoulder in a position that may be uncomfortable for users with shoulder limitations."
+    },
+    {
+        "rule_id": "R-CAR-001",
+        "name": "Assign low-impact fat-loss cardio frequency",
+        "category": "Program Direction",
+        "salience": 300,
+        "certainty_factor": 0.85,
+        "conditions": [
+            "conditioning_style is low_impact_fat_loss"
+        ],
+        "actions": [
+            "Set cardio_frequency = 3_to_4_low_impact_sessions_per_week"
+        ],
+        "explanation": "Low-impact cardio several times per week supports fat loss while limiting joint stress."
+    },
+    {
+        "rule_id": "R-CAR-002",
+        "name": "Assign endurance cardio frequency",
+        "category": "Program Direction",
+        "salience": 300,
+        "certainty_factor": 0.88,
+        "conditions": [
+            "goal_direction is endurance_focused",
+            "condition_none is True"
+        ],
+        "actions": [
+            "Set cardio_frequency = 3_progressive_endurance_sessions_per_week"
+        ],
+        "explanation": "Endurance users without medical caution can progress cardio frequency gradually."
+    },
+    {
+        "rule_id": "R-CAR-003",
+        "name": "Assign controlled cardio for asthma caution",
+        "category": "Medical Safety",
+        "salience": 1000,
+        "certainty_factor": 0.9,
+        "conditions": [
+            "cardio_caution_required is True"
+        ],
+        "actions": [
+            "Set cardio_frequency = controlled_low_to_moderate_sessions_with_long_warmup"
+        ],
+        "explanation": "Asthma-related caution should override aggressive cardio prescriptions."
+    },
+    {
+        "rule_id": "R-CAR-004",
+        "name": "Avoid jump-based HIIT when high impact is restricted",
+        "category": "Injury Safety",
+        "salience": 900,
+        "certainty_factor": 0.9,
+        "conditions": [
+            "avoid_high_impact is True"
+        ],
+        "actions": [
+            "Set cardio_avoidance = avoid_jump_based_hiit_and_sprints"
+        ],
+        "explanation": "When impact is restricted, conditioning should avoid jumps, sprints, and aggressive plyometrics."
+    },
+    {
+        "rule_id": "R-FIN-001",
+        "name": "Finalize beginner low-impact fat-loss plan",
+        "category": "Program Direction",
+        "salience": 100,
+        "certainty_factor": 0.9,
+        "conditions": [
+            "goal_direction is fat_loss_focused",
+            "experience_level is beginner",
+            "training_split is upper_lower",
+            "conditioning_style is low_impact_fat_loss"
+        ],
+        "actions": [
+            "Set final_program_type = beginner_4_day_low_impact_fat_loss"
+        ],
+        "explanation": "The final plan combines beginner status, fat-loss goal, four-day availability, and joint-friendly conditioning."
+    },
+    {
+        "rule_id": "R-FIN-002",
+        "name": "Finalize beginner strength foundation plan",
+        "category": "Program Direction",
+        "salience": 100,
+        "certainty_factor": 0.88,
+        "conditions": [
+            "goal_direction is strength_focused",
+            "experience_level is beginner",
+            "needs_technique_focus is True"
+        ],
+        "actions": [
+            "Set final_program_type = beginner_strength_foundation"
+        ],
+        "explanation": "Beginner strength users should follow a foundation plan focused on technique and gradual loading."
+    },
+    {
+        "rule_id": "R-FIN-003",
+        "name": "Finalize dumbbell hypertrophy split",
+        "category": "Program Direction",
+        "salience": 100,
+        "certainty_factor": 0.86,
+        "conditions": [
+            "goal_direction is hypertrophy_focused",
+            "equipment_level is limited_weights",
+            "training_split is upper_lower"
+        ],
+        "actions": [
+            "Set final_program_type = dumbbell_upper_lower_hypertrophy"
+        ],
+        "explanation": "A four-day upper/lower split works well for dumbbell-based muscle gain training."
+    },
+    {
+        "rule_id": "R-FIN-004",
+        "name": "Finalize medical-clearance-first plan",
+        "category": "Medical Safety",
+        "salience": 1000,
+        "certainty_factor": 0.95,
+        "conditions": [
+            "medical_clearance_required is True"
+        ],
+        "actions": [
+            "Set final_program_type = medical_clearance_required_before_plan"
+        ],
+        "explanation": "When severe injury risk exists, safety overrides the normal workout plan generation."
+    }
+]
