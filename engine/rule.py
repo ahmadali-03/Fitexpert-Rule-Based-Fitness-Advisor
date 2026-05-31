@@ -10,16 +10,12 @@ Action = Callable[[Any, Any], Iterable[str] | str | None]
 
 @dataclass
 class Rule:
-    """
-    Represents one expert-system production rule.
-
-    A rule has:
-    - IF part: conditions
-    - THEN part: actions
-    - salience: priority for conflict resolution
-    - certainty factor: confidence strength of the rule
-    - explanation: human-readable reason for the rule
-    """
+    """rule has
+    IF part: conditions
+    THEN part: actions
+    salience: priority for conflict resolution
+    certainty factor: confidence strength of the rule
+    explanation: human-readable reason for the rule"""
 
     rule_id: str
     name: str
@@ -33,15 +29,11 @@ class Rule:
     explanation: str = ""
 
     def is_applicable(self, fact_base: Any) -> bool:
-        """Return True if all rule conditions match the current fact base."""
+
         return all(condition(fact_base) for condition in self.conditions)
 
     def fire(self, fact_base: Any) -> list[str]:
-        """
-        Execute rule actions.
 
-        Returns a list of fact names that were created or updated.
-        """
         changed_facts: list[str] = []
 
         for action in self.actions:
@@ -60,8 +52,7 @@ class Rule:
 
     @property
     def specificity(self) -> int:
-        """
-        More conditions = more specific rule.
-        Used as a tie-breaker in conflict resolution.
-        """
+
+        #More conditions means more specific rule
+
         return len(self.conditions)

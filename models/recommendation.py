@@ -5,9 +5,6 @@ from dataclasses import dataclass, field
 
 @dataclass
 class ExerciseRecommendation:
-    """
-    Represents one recommended exercise.
-    """
 
     name: str
     category: str
@@ -19,9 +16,6 @@ class ExerciseRecommendation:
 
 @dataclass
 class WorkoutDay:
-    """
-    Represents one day in the workout plan.
-    """
 
     day_name: str
     focus: str
@@ -30,10 +24,6 @@ class WorkoutDay:
 
 @dataclass
 class FitnessRecommendation:
-    """
-    Final output object produced after inference.
-    """
-
     program_title: str
     training_split: str
     weekly_days: int

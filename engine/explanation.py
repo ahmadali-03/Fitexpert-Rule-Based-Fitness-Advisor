@@ -7,9 +7,6 @@ from engine.rule import Rule
 
 @dataclass
 class RuleTrace:
-    """
-    Stores one fired rule for explanation.
-    """
 
     rule_id: str
     rule_name: str
@@ -23,9 +20,6 @@ class RuleTrace:
 
 
 class ExplanationTrace:
-    """
-    Tracks the reasoning chain of the expert system.
-    """
 
     def __init__(self) -> None:
         self.fired_rules: list[RuleTrace] = []

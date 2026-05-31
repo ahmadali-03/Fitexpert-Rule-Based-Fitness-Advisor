@@ -8,12 +8,6 @@ from knowledge_base.rules import get_rules
 
 
 class RuleExporter:
-    """
-    Exports the Python knowledge base into human-readable documentation files.
-
-    The system uses rules.py as the executable knowledge base.
-    JSON and Markdown exports are for documentation, viva, and report purposes.
-    """
 
     def __init__(
         self,

@@ -4,17 +4,7 @@ from models.user_profile import UserProfile
 
 
 def get_sample_profiles() -> list[tuple[str, UserProfile]]:
-    """
-    Multiple test profiles for validating FitExpert.
 
-    Each scenario is designed to test different expert-system reasoning paths:
-    - goal selection
-    - injury overrides
-    - medical caution
-    - equipment limitations
-    - schedule selection
-    - age-based rules
-    """
 
     return [
         (

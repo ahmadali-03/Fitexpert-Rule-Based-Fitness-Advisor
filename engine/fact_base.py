@@ -6,9 +6,6 @@ from typing import Any
 
 @dataclass
 class Fact:
-    """
-    Represents one fact in working memory.
-    """
 
     name: str
     value: Any
@@ -18,13 +15,8 @@ class Fact:
 
 
 class FactBase:
-    """
-    Working memory of the expert system.
 
-    Stores:
-    - initial user facts
-    - derived facts created by fired rules
-    """
+    #Storing the initial user facts and derived facts created by fired rules"""
 
     def __init__(self) -> None:
         self._facts: dict[str, Fact] = {}
@@ -38,11 +30,8 @@ class FactBase:
         source_rule: str = "UNKNOWN",
         explanation: str = "",
     ) -> bool:
-        """
-        Add or update a fact.
+        #Add or update a fact and then returns True if the fact was newly added or updated meaningfully
 
-        Returns True if the fact was newly added or meaningfully updated.
-        """
         certainty = max(-1.0, min(1.0, certainty))
 
         existing_fact = self._facts.get(name)
@@ -58,7 +47,7 @@ class FactBase:
             self.history.append(f"ADDED: {name} = {value} CF={certainty}")
             return True
 
-        # If same value exists but new certainty is stronger, update it.
+        # If same value exists but new certainty is stronger so update it.
         if existing_fact.value == value and certainty > existing_fact.certainty:
             existing_fact.certainty = certainty
             existing_fact.source_rule = source_rule
@@ -66,7 +55,7 @@ class FactBase:
             self.history.append(f"UPDATED CF: {name} = {value} CF={certainty}")
             return True
 
-        # If different value appears with stronger certainty, replace it.
+        # If different value appears with stronger certainty then replace it.
         if existing_fact.value != value and certainty > existing_fact.certainty:
             old_value = existing_fact.value
             existing_fact.value = value

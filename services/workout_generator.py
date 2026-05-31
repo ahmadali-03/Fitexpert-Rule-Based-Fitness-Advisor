@@ -10,13 +10,6 @@ from models.recommendation import (
 
 
 class WorkoutGenerator:
-    """
-    Converts inferred expert-system facts into a readable workout plan.
-
-    Important:
-    This class does not perform expert reasoning.
-    It only formats conclusions already inferred by the rule engine.
-    """
 
     def generate(self, fact_base: FactBase, reasoning_summary: str = "") -> FitnessRecommendation:
         program_title = self._get_program_title(fact_base)

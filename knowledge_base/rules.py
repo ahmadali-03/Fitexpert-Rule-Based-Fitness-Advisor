@@ -67,16 +67,9 @@ def add_fact_action(
 
 
 def get_rules() -> list[Rule]:
-    """
-    Returns the FitExpert knowledge base.
-
-    Batch 1 currently contains 45 meaningful rules.
-    More rules will be added in later batches until the project reaches 90-100 rules.
-    """
 
     rules: list[Rule] = [
 
-        # ============================================================
         # AGE CLASSIFICATION RULES
         # ============================================================
 
@@ -216,7 +209,6 @@ def get_rules() -> list[Rule]:
             explanation="Senior users may have higher joint stress risk, so lower-impact training is preferred.",
         ),
 
-        # ============================================================
         # BMI CLASSIFICATION RULES
         # ============================================================
 
@@ -410,7 +402,6 @@ def get_rules() -> list[Rule]:
             explanation="Low-impact training reduces unnecessary stress on knees, hips, and ankles.",
         ),
 
-        # ============================================================
         # EXPERIENCE RULES
         # ============================================================
 
@@ -546,7 +537,6 @@ def get_rules() -> list[Rule]:
             explanation="Advanced users without injuries can progress load, reps, or volume more aggressively.",
         ),
 
-        # ============================================================
         # SCHEDULE RULES
         # ============================================================
 
@@ -684,7 +674,6 @@ def get_rules() -> list[Rule]:
             explanation="Push/pull/legs works well for frequent training but must be adjusted if safety risks exist.",
         ),
 
-        # ============================================================
         # EQUIPMENT RULES
         # ============================================================
 
@@ -844,7 +833,6 @@ def get_rules() -> list[Rule]:
             explanation="A full gym allows safer machine alternatives, free-weight lifts, and cardio equipment.",
         ),
 
-        # ============================================================
         # MEDICAL SAFETY RULES
         # ============================================================
 
@@ -954,7 +942,6 @@ def get_rules() -> list[Rule]:
             explanation="Endurance training can still be used, but intensity should progress gradually for asthma users.",
         ),
 
-        # ============================================================
         # INJURY SAFETY RULES
         # ============================================================
 
@@ -1274,7 +1261,6 @@ def get_rules() -> list[Rule]:
             explanation="Severe shoulder pain should be professionally assessed before upper-body loading.",
         ),
 
-        # ============================================================
         # GOAL ANALYSIS RULES
         # ============================================================
 
@@ -1490,7 +1476,6 @@ def get_rules() -> list[Rule]:
             explanation="Flexibility improves best when stretching is combined with controlled range-of-motion practice.",
         ),
 
-        # ============================================================
         # INTENSITY PROFILE RULES
         # ============================================================
 
@@ -1650,7 +1635,6 @@ def get_rules() -> list[Rule]:
             explanation="Safety rules override normal training rules when severe injury risk is present.",
         ),
 
-        # ============================================================
         # SETS, REPS, AND VOLUME RULES
         # ============================================================
 
@@ -1888,7 +1872,6 @@ def get_rules() -> list[Rule]:
             explanation="Conservative progression helps reduce recovery and joint-stress problems in senior users.",
         ),
 
-        # ============================================================
         # EXERCISE SELECTION STYLE RULES
         # ============================================================
 
@@ -2170,7 +2153,6 @@ def get_rules() -> list[Rule]:
             explanation="A combination of controlled mobility and static stretching supports flexibility goals.",
         ),
 
-        # ============================================================
         # INJURY SUBSTITUTION RULES
         # ============================================================
 
@@ -2408,7 +2390,6 @@ def get_rules() -> list[Rule]:
             explanation="Upright rows can place the shoulder in a position that may be uncomfortable for users with shoulder limitations.",
         ),
 
-        # ============================================================
         # CARDIO AND CONDITIONING RULES
         # ============================================================
 
@@ -2518,7 +2499,6 @@ def get_rules() -> list[Rule]:
             explanation="When impact is restricted, conditioning should avoid jumps, sprints, and aggressive plyometrics.",
         ),
 
-        # ============================================================
         # FINAL PROGRAM TYPE RULES
         # ============================================================
 

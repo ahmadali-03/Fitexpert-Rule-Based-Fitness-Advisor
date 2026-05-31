@@ -1,8 +1,3 @@
-"""
-Rule categories and salience levels for FitExpert.
-
-Higher salience means higher priority during conflict resolution.
-"""
 
 CATEGORY_MEDICAL_SAFETY = "Medical Safety"
 CATEGORY_INJURY_SAFETY = "Injury Safety"

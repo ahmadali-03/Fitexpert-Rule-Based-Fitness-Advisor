@@ -7,17 +7,13 @@ from engine.rule import Rule
 
 
 class InferenceEngine:
-    """
-    Custom forward-chaining inference engine.
-
-    Process:
-    1. Match rules against current facts.
-    2. Add matching rules to agenda.
-    3. Resolve conflicts using salience/specificity/certainty.
-    4. Fire selected rule.
-    5. Add derived facts to working memory.
-    6. Repeat until no more rules can fire.
-    """
+    """Process
+    Match rules against current facts.
+    Add matching rules to agenda.
+    Resolve conflicts using salience/specificity/certainty.
+    Fire selected rule.
+    Add derived facts to working memory.
+    Repeat until no more rules can fire."""
 
     def __init__(
         self,

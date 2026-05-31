@@ -8,14 +8,9 @@ def clamp_cf(value: float) -> float:
 
 def combine_cf(existing_cf: float, new_cf: float) -> float:
     """
-    Combine two certainty factors.
-
-    Supports positive and negative evidence.
-    Range:
     -1.0 = definitely false
      0.0 = unknown
-    +1.0 = definitely true
-    """
+    +1.0 = definitely true"""
 
     existing_cf = clamp_cf(existing_cf)
     new_cf = clamp_cf(new_cf)
@@ -38,13 +33,9 @@ def combine_cf(existing_cf: float, new_cf: float) -> float:
 
 
 def multiply_cf(*values: float) -> float:
-    """
-    Multiply certainty factors.
 
-    Useful when rule confidence depends on both:
-    - certainty of input facts
-    - certainty of the rule itself
-    """
+    #Multiply certainty factors --- certainty of input facts certainty of the rule itself
+
     result = 1.0
 
     for value in values:

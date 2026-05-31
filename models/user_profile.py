@@ -5,12 +5,6 @@ from dataclasses import dataclass, field
 
 @dataclass
 class UserProfile:
-    """
-    Stores raw user input before expert-system reasoning.
-
-    This class does not make decisions.
-    It only represents the user's profile data.
-    """
 
     age: int
     height_cm: float
@@ -25,11 +19,6 @@ class UserProfile:
     medical_conditions: list[str] = field(default_factory=list)
 
     def calculate_bmi(self) -> float:
-        """
-        Calculate Body Mass Index.
-
-        BMI = weight in kg / height in meters squared
-        """
         height_m = self.height_cm / 100
 
         if height_m <= 0:
@@ -38,9 +27,6 @@ class UserProfile:
         return round(self.weight_kg / (height_m ** 2), 2)
 
     def validate(self) -> None:
-        """
-        Basic validation of raw user input.
-        """
 
         valid_goals = {
             "strength",

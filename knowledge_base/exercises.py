@@ -5,9 +5,6 @@ from dataclasses import dataclass, field
 
 @dataclass(frozen=True)
 class Exercise:
-    """
-    Represents one exercise option in the exercise knowledge base.
-    """
 
     name: str
     category: str
@@ -18,7 +15,6 @@ class Exercise:
 
 
 EXERCISE_DATABASE: list[Exercise] = [
-    # ============================================================
     # UPPER BODY PUSH
     # ============================================================
 
@@ -59,7 +55,6 @@ EXERCISE_DATABASE: list[Exercise] = [
         notes="Stable pressing option for gym users.",
     ),
 
-    # ============================================================
     # UPPER BODY PULL
     # ============================================================
 
@@ -99,7 +94,6 @@ EXERCISE_DATABASE: list[Exercise] = [
         notes="Use light/no weight and focus on control.",
     ),
 
-    # ============================================================
     # LOWER BODY
     # ============================================================
 
@@ -149,7 +143,6 @@ EXERCISE_DATABASE: list[Exercise] = [
         notes="Keep range controlled and avoid locking knees.",
     ),
 
-    # ============================================================
     # CORE
     # ============================================================
 
@@ -182,7 +175,6 @@ EXERCISE_DATABASE: list[Exercise] = [
         notes="Keep hips stacked and body straight.",
     ),
 
-    # ============================================================
     # CARDIO
     # ============================================================
 
@@ -223,7 +215,6 @@ EXERCISE_DATABASE: list[Exercise] = [
         notes="March in place with controlled effort.",
     ),
 
-    # ============================================================
     # MOBILITY
     # ============================================================
 
@@ -265,9 +256,8 @@ def get_exercises_by_category(
     preferred_tags: set[str] | None = None,
     limit: int = 4,
 ) -> list[Exercise]:
-    """
-    Select exercises by category, equipment, and safety restrictions.
-    """
+
+    #Select exercises by category, equipment, and safety restrictions
 
     forbidden_flags = forbidden_flags or set()
     preferred_tags = preferred_tags or set()
@@ -286,7 +276,6 @@ def get_exercises_by_category(
 
         candidates.append(exercise)
 
-    # Prefer exercises with matching tags.
     candidates.sort(
         key=lambda exercise: len(exercise.tags.intersection(preferred_tags)),
         reverse=True,

@@ -5,13 +5,6 @@ from models.user_profile import UserProfile
 
 
 class ProfileAnalyzer:
-    """
-    Converts raw user profile data into initial working-memory facts.
-
-    Important:
-    This service does not perform expert reasoning.
-    It only prepares facts for the inference engine.
-    """
 
     def create_initial_facts(self, profile: UserProfile) -> FactBase:
         profile.validate()
